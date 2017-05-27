@@ -14,12 +14,7 @@ function zongjiManager(dsn, options, onBinlog) {
         setTimeout(function() {
             // If multiple errors happened, a new instance may have already been created
             if(!newInst.child) {
-                var newInstNext = zongjiManager(dsn, Object.assign({}, options, newInst.binlogNextPos
-                 	    ? {  binlogName: newInst.binlogName,
-                        	 binlogNextPos: newInst.binlogNextPos
-                 	      }
-                 	    : {}
-                ), onBinlog);
+                var newInstNext = zongjiManager(dsn, options, onBinlog);
                 newInst.stop();
                 newInst = newInstNext;
                 newInst.child = true;
